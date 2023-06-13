@@ -1,0 +1,205 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- [ Main Content ] start -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Danh sách khách hàng</h1>
+    <p class="mb-4">
+        <div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="searchkeyword">Từ khóa:</label>
+                    <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" id="searchkeyword">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="startday">Từ ngày:</label>
+                    <input type="date" class="form-control" id="startday" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="endday">Đến ngày:</label>
+                    <input type="date" class="form-control" id="endday" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="status">Trạng thái:</label>
+                    <select id="statuscustomer" asp-items="@ViewBag.SelectCus" class="form-control">
+                        <option>--Chọn trạng thái--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-9"></div>
+                <div class="col-md-3">
+                    <button onclick="search()" class="btn btn-outline-primary" type="button" id="btnsearch">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                    <button onclick="reset()" class="btn btn-info" type="button">
+                        <i class="fa fa-backward" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </p>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"></h6>
+            <button onclick="openmodal()" style="float:right" type="button" class="btn btn-info">
+                <i class="fa fa-balance-scale" aria-hidden="true"></i> 
+               Chia sale
+            </button>
+        </div>
+        <div class="card-body">
+            <div id="table-data">
+                <div class="card-body">
+                    <div class="spinner-grow text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-secondary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-success" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-danger" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-warning" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-info" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-light" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-dark" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chia đơn</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="hidden" id="idhi" />
+                    <label for="recipient-name" class="col-form-label">Tài khoản sale</label>
+                    <select asp-items="@ViewBag.UserSale" class="form-control" id="userSale">
+                        <option>Chọn tài khoản</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="update()" class="btn  btn-primary" title="Chia đơn">
+                    <i class="fa fa-cloud" aria-hidden="true"></i>
+                    </button>
+                <button type="button" class="btn  btn-secondary" data-dismiss="modal" title="Đóng lại">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                    </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        let pagenum = 0;
+        $(document).ready(function () {
+            load(1, null);
+            pagenum = 1;
+        });
+        function openmodal() {
+            $('#exampleModal').modal();
+        };
+        function reset() {
+            window.location.reload();
+        };
+        function isdaycheck() {
+            var startday = $("#startday").val();
+            var endtday = $("#endday").val();
+            let datestart = new Date(startday);
+            let dateend = new Date(endtday);
+
+            if (datestart > dateend) {
+                $.notify("Ngày bắt đầu lớn hơn ngày kết thúc", "error");
+                $("#btnsearch").prop('disabled', true);
+            } else {
+                $("#btnsearch").prop('disabled', false);
+            }
+        }
+        $("#startday").change(function () {
+            isdaycheck();
+        });
+        $("#endday").change(function () {
+            isdaycheck();
+        });
+        // Load data
+        function load(i, keyword) {
+            axios.get('@Url.Action("Table", "SingleSale")', {
+                params: {
+                    //  pageding: datas
+                    KeyWord: keyword,
+                    PageNum: i,
+                    PageSize: 8,
+                    StartDay: $("#startday").val(),
+                    EndDay: $("#endday").val(),
+                    StatusCustomer: $('#statuscustomer').val(),
+                }
+            })
+                .then(function (response) {
+                    $("#table-data").html(response.data);
+                })
+                .catch(function (error) {
+                    $.notify(error, "error");
+                })
+        }
+        function nextpage(i) {
+            pagenum = i;
+            load(i, $("#searchkeyword").val());
+        }
+        //
+        function search() {
+            load(pagenum, $("#searchkeyword").val());
+        };
+        function update() {
+            // Lay list cus //
+            var selected = [];
+            $('#checkboxes input:checked').each(function () {
+                selected.push($(this).attr('name'));
+            });
+
+            let usersale = $("#userSale").val();
+
+            let formdata = new FormData();
+            formdata.append('saleid', usersale);
+            formdata.append('cusid', selected);
+
+            axios.post('@Url.Action("UpdateSale", "SingleSale")', formdata
+                 )
+                .then(function (response) {
+                    $.notify("Chia đơn thành công!", "success");
+                    load(1, null);
+                    $('#exampleModal').modal('hide');
+                })
+                .catch(function (error) {
+                    $.notify(error, "error");
+                });
+        }
+    </script>
+}

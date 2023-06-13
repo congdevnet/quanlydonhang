@@ -1,0 +1,84 @@
+﻿@using WebQuanLyBanHang.Utilities.ViewModel;
+@using WebQuanLyBanHang.Utilities;
+@model ResponseData<OrderDetailed>
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+
+<div class="card-body table-border-style">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover" style="table-layout: fixed; width: 100%">
+            <thead>
+                <tr>
+                    <th style="font-size:13px" class="text-center" width="35%">Khách hàng</th>
+                    <th style="font-size:13px" class="text-center" width="15%">Ngày lập đơn</th>
+                    <th style="font-size:13px" class="text-center" width="20%">Trạng thái</th>
+                    <th style="font-size:13px" class="text-center" width="30%">Chức năng</th>
+                </tr>
+            </thead>
+            <tbody id="checkboxes">
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td style="font-size:13px">
+                            <span>Khách: </span>@item.CustomerName
+                            <br />
+                            <span>Sđt: </span>@item.CustomerPhone
+                            <br />
+                            <span>Email: </span>@item.CustomerEmail
+                            <br />
+                            <span style="font-size:11px">Địa chỉ: @item.Address </span>
+                        </td>
+                        <td class="text-center" style="font-size:13px"> @item.OrderDate.Value.ToString("dd/MM/yyyy")</td>
+                        <td class="text-center" style="font-size:13px">
+                            @if (item.OderStatusId == 5)
+                            {
+                                <select id="@item.OrderId" asp-for="@item.OderStatusId"
+                                asp-items="@ViewBag.OrderStatus" disabled="true"
+                                        onchange="confirm('@item.OrderId')"
+                                        class="form-control" style="font-size:13px">
+                                </select>
+                            }else
+                           {    <select id="@item.OrderId" asp-for="@item.OderStatusId"
+                                asp-items="@ViewBag.OrderStatus"
+                                    onchange="confirm('@item.OrderId')"
+                                    class="form-control" style="font-size:13px">
+                                </select>
+                           }
+                        <td class="text-center" style="font-size:13px">
+                                    <a class="btn btn-success" asp-controller="OrderMag" asp-action="ViewOder"
+                                   asp-route-id="@item.OrderId" title="Xem đơn">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                @if (item.OderStatusId ==5)
+                                {
+                                    <a class="btn btn-warning" asp-controller="OrderMag" asp-action="ViewOder"
+                                   asp-route-id="@item.OrderId" title="Tái ký">
+                                        <i class="fa fa-university" aria-hidden="true"></i>
+                                    </a>
+                                }
+                                @if (item.OderStatusId < 4)
+                                {
+                                    <a class="btn btn-facebook" asp-controller="OrderMag" asp-action="Edit"
+                               asp-route-id="@item.OrderId" title="Sửa đơn">
+                                        <i class="fa fa-wrench" aria-hidden="true"></i>
+                                    </a>
+                                }
+                                @if (item.OderStatusId < 3)
+                                {
+                                <a class="btn btn-google" onclick="del('@item.OrderId')" title="Xóa">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                                }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div>
+            @await Component.InvokeAsync("Paging", Model)
+        </div>
+    </div>
+</div>

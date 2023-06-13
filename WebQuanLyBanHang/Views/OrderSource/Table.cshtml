@@ -1,0 +1,43 @@
+﻿@using WebQuanLyBanHang.Utilities.ViewModel;
+@using WebQuanLyBanHang.Utilities;
+@model ResponseData<OrderSourceVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+<div class="card-body table-border-style">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Stt</th>
+                    <th>Tên</th>
+                    <th>Trạng thái</th>
+                    <th class="text-center">Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.IsCheck</td>
+                        <td class="text-center">
+                            <button class="btn btn-success" onclick="edit('@item.Id')" title="Sửa đơn">
+                                <i class="fa fa-wrench" aria-hidden="true"></i>
+                                Sửa</button>&nbsp;|
+                            <button class="btn btn-danger" onclick="del('@item.Id')" title="Xóa đơn">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                Xóa</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div>
+            @await Component.InvokeAsync("Paging", Model)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,416 @@
+﻿@using WebQuanLyBanHang.Common;
+@using WebQuanLyBanHang.Utilities.ViewModel;
+@model OrderInformationVM;
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var data = Model;
+}
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <div class="page-header-title">
+                        <h5 class="m-b-10">Chỉnh sửa đơn hàng</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form asp-action="Edit" asp-controller="OrderMag" method="post" enctype="multipart/form-data">
+            <div class="alert alert-primary" role="alert">
+                Thông tin khách hàng
+            </div>
+            <div class="form-row">
+                <input type="hidden" asp-for="CustomerOrder.CusId" />
+                <input type="hidden" asp-for="OrderId" />
+                <div class="form-group col-md-4">
+                    <label asp-for="CustomerOrder.CusName">Tên khách hàng</label>
+                    <input type="text" class="form-control" asp-for="CustomerOrder.CusName" placeholder="Nhập tên khách hàng">
+                    <span asp-validation-for="CustomerOrder.CusName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="CustomerOrder.CusPhoneNumber">Điện thoại</label>
+                    <input asp-for="CustomerOrder.CusPhoneNumber" type="text" class="form-control" readonly />
+                    <span asp-validation-for="CustomerOrder.CusPhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="CustomerOrder.CusGender">Giới tính</label>
+                    <select asp-for="CustomerOrder.CusGender" asp-items="Html.GetEnumSelectList<Gender>()"
+                            class="form-control"></select>
+                    <span asp-validation-for="CustomerOrder.CusGender" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label asp-for="CustomerOrder.DateOfBirth">Ngày sinh</label>
+                    <input asp-for="CustomerOrder.DateOfBirth" type="date" class="form-control">
+                    <span asp-validation-for="CustomerOrder.DateOfBirth" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="CustomerOrder.CusGrpCusId">Nhóm khách</label>
+                    <select asp-for="CustomerOrder.CusGrpCusId" asp-items="@ViewBag.GroupCustomer" class="form-control">
+                    </select>
+                    <span asp-validation-for="CustomerOrder.CusGrpCusId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="CustomerOrder.CusEmail">Email</label>
+                    <input asp-for="CustomerOrder.CusEmail" type="email" class="form-control">
+                    <span asp-validation-for="CustomerOrder.CusEmail" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="CustomerOrder.CusAge">Tuổi</label>
+                    <input asp-for="CustomerOrder.CusAge" type="number" class="form-control" />
+                    <span asp-validation-for="CustomerOrder.CusAge" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="CustomerOrder.CusWeight">Cân nặng</label>
+                    <input asp-for="CustomerOrder.CusWeight" type="number" class="form-control" />
+                    <span asp-validation-for="CustomerOrder.CusWeight" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="CustomerOrder.CusCity">Tỉnh/Thành phố</label>
+                    <select asp-for="CustomerOrder.CusCity" asp-items="@ViewBag.Provinces" class="form-control">
+                        <option>Chọn tỉnh</option>
+                    </select>
+                    <span asp-validation-for="CustomerOrder.CusCity" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="CustomerOrder.CusDistrict">Huyện/Quận</label>
+                    <select asp-for="CustomerOrder.CusDistrict" asp-items="@ViewBag.CusDistrict" class="form-control">
+                        <option>Chọn huyện</option>
+                    </select>
+                    <span asp-validation-for="CustomerOrder.CusDistrict" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="CustomerOrder.Cusward">Xã/Phường</label>
+                    <select asp-for="CustomerOrder.Cusward" asp-items="@ViewBag.Cusward" class="form-control">
+                        <option>Chọn xã</option>
+                    </select>
+                    <span asp-validation-for="CustomerOrder.Cusward" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="CustomerOrder.CusAddress">Số nhà</label>
+                    <input asp-for="CustomerOrder.CusAddress" type="text" class="form-control" />
+                    <span asp-validation-for="CustomerOrder.CusAddress" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="alert alert-secondary" role="alert">
+                Thông tin đơn hàng
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label>Phân loại</label>
+                    <select asp-for="ManagementOrderVM.OrderInfoContentId" asp-items="@ViewBag.OrderInfoContent" class="form-control">
+                    </select>
+                    <span asp-validation-for="ManagementOrderVM.OrderInfoContentId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label>Loại đơn</label>
+                    <select asp-for="ManagementOrderVM.SingleTypeId" asp-items="@ViewBag.SingleType" class="form-control">
+                    </select>
+                    <span asp-validation-for="ManagementOrderVM.SingleTypeId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Trạng thái</label>
+                    <select asp-for="ManagementOrderVM.OrderStatusId" asp-items="@ViewBag.OrderStatus" class="form-control">
+                    </select>
+                    <span asp-validation-for="ManagementOrderVM.OrderStatusId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Giao hàng</label>
+                    <select asp-for="ManagementOrderVM.MethodDeliveryId" asp-items="@ViewBag.MethodDelivery" class="form-control">
+                    </select>
+                    <span asp-validation-for="ManagementOrderVM.MethodDeliveryId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label>Nguồn MKT</label>
+                    <select asp-for="ManagementOrderVM.OrderSourceId" asp-items="@ViewBag.OrderSource" class="form-control">
+                    </select>
+                    <span asp-validation-for="ManagementOrderVM.OrderSourceId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="alert alert-success" role="alert">
+                Sản phẩm/Hàng hóa
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <input type="hidden" id="proId" />
+                    <label>Sản phẩm</label>
+                    <input type="text" class="form-control" id="txtProductName">
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Số lượng</label>
+                    <input type="number" min="1" id="Quantity" class="form-control" />
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label>Đơn giá</label>
+                    <input id="price" type="number" class="form-control" readonly />
+                    <input id="pricehide" type="hidden" class="form-control" readonly />
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Ấn để thêm</label>
+                    <a style="display:block" onclick="savepro()" class="btn btn-info">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Thêm </a>
+                </div>
+            </div>
+            <div class="form-group">
+                <div id="table-product">
+                </div>
+            </div>
+            <div class="alert alert-danger" role="alert">
+                Chi phí
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label>Thành Tiền</label>
+                    <input asp-for="ExpenseOrderVM.IntoMoney" step="0.1" min="0" type="number" class="form-control" readonly />
+                    <span asp-validation-for="ExpenseOrderVM.IntoMoney" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Giảm giá (theo %)</label>
+                    <input asp-for="ExpenseOrderVM.Discount" step="0.1" min="0" type="number" class="form-control" />
+                    <span asp-validation-for="ExpenseOrderVM.Discount" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Phí vận chuyển</label>
+                    <input asp-for="ExpenseOrderVM.TransportFee" min="0" step="0.1" type="number"  class="form-control" />
+                    <span asp-validation-for="ExpenseOrderVM.TransportFee" class="text-danger"></span>
+                </div>
+                @*<div class="form-group col-md-3">
+                <label asp-for="ExpenseOrderVM.Surcharge" >Phụ thu</label>
+                <input asp-for="ExpenseOrderVM.Surcharge" type="number" min="0" step="0.1" class="form-control" />
+                </div>
+                <div class="form-group col-md-3">
+                <label asp-for="ExpenseOrderVM.DeclarePrice">Khai giá</label>
+                <input asp-for="ExpenseOrderVM.DeclarePrice" type="number" min="0" step="0.1" class="form-control" />
+                </div>*@
+                <div class="form-group col-md-3">
+                    <label>Còn phải trả</label>
+                    <input asp-for="ExpenseOrderVM.Payments" type="text" class="form-control"  readonly />
+                    <span asp-validation-for="ExpenseOrderVM.Payments" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Trả trước</label>
+                    <input asp-for="ExpenseOrderVM.Prepay" type="number" step="0.1" class="form-control" />
+                    <span asp-validation-for="ExpenseOrderVM.Prepay" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Còn nợ</label>
+                    <input asp-for="ExpenseOrderVM.StillOwed" type="number" step="0.1" class="form-control" readonly />
+                    <span asp-validation-for="ExpenseOrderVM.StillOwed" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="alert alert-info" role="alert">
+                Thanh toán
+                <div style="display: none;float: right;" id="PaymentSystem">
+                    <p style="color: red;display: inline;margin-bottom: 0px;">
+                        Hệ thống thanh toán đã thay đổi giá trị bạn ấn cập
+                        nhật để ghi nhận thay đổi
+                    </p>
+                    <a style="display: inline-block;border-bottom-width:
+                    0px;padding-bottom: 0px;padding-top: 0px;padding-left: 10px;border-left-width: 0px;border-top-width:
+                    0px;border-right-width: 0px;cursor:pointer" onclick="saveExpenseOrders()"
+                    class="btn btn-info">Cập nhật</a>
+                </div>
+            </div>
+            
+            <div class="form-group col-md-12">
+                <label>Ghi chú</label>
+                <textarea asp-for="ManagementOrderVM.Note" rows="3" class="form-control"></textarea>
+                <span asp-validation-for="ManagementOrderVM.Note" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn  btn-primary">Lưu lại</button>
+            <a href="/danh-sach-don-dat-hang" class="btn btn-light">Hủy</a>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+           getCart();
+            $("#txtProductName").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '@Url.Action("FindProduct", "OrderMag")',
+                        type: "POST",
+                        dataType: "json",
+                        data: { keyword: request.term },
+
+                        success: function (data) {
+
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.productName,
+                                    value: item.productName,
+                                    id: item.id,
+                                    price: item.price
+                                };
+                            }));
+                        }
+
+                    });
+                },
+                focus: function (event, ui) {
+                    $("#proId").val(ui.item.id);
+                    $("#txtProductName").val(ui.item.value);
+                    return false;
+                },
+                select: function (event, ui) {
+                    $("#proId").val(ui.item.id);
+                    $("#txtProductName").val(ui.item.value);
+                    $("#Quantity").val(1);
+                    $("#pricehide").val(ui.item.price);
+                    $("#price").val(ui.item.price);
+                    return false;
+                }
+            });
+        });
+
+        $("#Quantity").change(function () {
+            let quantity = parseInt($("#Quantity").val(), 10);
+            let price = parseInt($("#pricehide").val(), 10);
+            $("#price").val(quantity * price);
+
+        });
+        function savepro() {
+            axios
+                .post('@Url.Action("Add", "ProductOrders")', {
+                    // Data to be sent to the server
+                    orderId: $("#OrderId").val(),
+                    productId: $("#proId").val(),
+                    quantity: $("#Quantity").val(),
+
+                })
+                .then(response => {
+                    getCart();
+                    setInterval(changPirce,1500);
+                    
+                    $.notify("Thêm mới thành công!", "success");
+                })
+                .catch(function (error) {
+                    $.notify(error, "error");
+                });
+        };
+
+        function saveExpenseOrders(){
+            axios
+                .post('@Url.Action("Update", "ExpenseOrders")', {
+                    // Data to be sent to the server
+                    orderId: $("#OrderId").val(),
+                    intoMoney: $("#ExpenseOrderVM_IntoMoney").val(),
+                    discount: $("#ExpenseOrderVM_Discount").val(),
+                    transportFee: $("#ExpenseOrderVM_TransportFee").val(),
+                    prepay: $("#ExpenseOrderVM_Prepay").val(),
+                    stillOwed: $("#ExpenseOrderVM_StillOwed").val(),
+                    payments: $("#ExpenseOrderVM_Payments").val(),
+                })
+                .then(response => {
+                    $.notify("Chỉnh sủa đơn giá thành công!", "success");
+                })
+                .catch(function (error) {
+                    $.notify(error, "error");
+                });
+        }
+
+
+        function delCart(id) {
+            axios.get('@Url.Action("Delete", "ProductOrders")', {
+                params: {
+                    id: id,
+                }
+            })
+                .then(function (response) {
+                    getCart();
+                    setInterval(changPirce, 1500);
+                   
+                })
+                .catch(function (error) {
+                    $.notify(error, "error");
+                })
+        };
+        function changPirce() {
+            let giagoc = parseFloat($("#ExpenseOrderVM_IntoMoney").val());
+            let giamgia = parseFloat($("#ExpenseOrderVM_Discount").val() == '' ? '0' : $("#ExpenseOrderVM_Discount").val());
+            let giavanchuyen = parseFloat($("#ExpenseOrderVM_TransportFee").val() == '' ? '0' : $("#ExpenseOrderVM_TransportFee").val());
+            let giaduocgiam = ((giagoc * giamgia) / 100);
+            let giatra = giagoc - giaduocgiam + giavanchuyen;
+            $("#ExpenseOrderVM_Payments").val(giatra);
+            giatrano();
+
+            $("#PaymentSystem").show();
+        };
+        $("#ExpenseOrderVM_Discount").change(function () {
+            changPirce();
+        });
+        $("#ExpenseOrderVM_Prepay").change(function () {
+            giatrano();
+        });
+        function giatrano() {
+            let giatra = $("#ExpenseOrderVM_Payments").val();
+            let sotientra = parseFloat($("#ExpenseOrderVM_Prepay").val() == '' ? '0' : $("#ExpenseOrderVM_Prepay").val());
+            let conno = $("#ExpenseOrderVM_StillOwed").val(giatra - sotientra);
+        };
+
+        $("#ExpenseOrderVM_TransportFee").change(function () {
+            changPirce();
+        });
+        function getCart() {
+            axios.get('@Url.Action("GetCartItem", "OrderMag")', {})
+                .then(function (response) {
+                    $("#table-product").html(response.data);
+                    $("#ExpenseOrderVM_IntoMoney").val($("#sumCart").text());
+                })
+                .catch(function (error) {
+                    $.notify(error, "error");
+                })
+        }
+        $("#CustomerOrder_CusCity").change(() => {
+            axios.get('@Url.Action("GetDistrict", "OrderMag")', {
+                params: {
+                    city: $('#CustomerOrder_CusCity').val(),
+                }
+            })
+                .then(function (response) {
+                    renderData(response.data, "CustomerOrder_CusDistrict");
+                })
+                .catch(function (error) {
+                    $.notify(error, "error");
+                })
+        });
+        $("#CustomerOrder_CusDistrict").change(() => {
+            axios.get('@Url.Action("GetWard", "OrderMag")', {
+                params: {
+                    district: $('#CustomerOrder_CusDistrict').val(),
+                }
+            })
+                .then(function (response) {
+                    renderData(response.data, "CustomerOrder_Cusward");
+                })
+                .catch(function (error) {
+                    $.notify(error, "error");
+                })
+        });
+        var renderData = (array, select) => {
+            let row = '';
+            array.forEach(element => {
+                row += `<option data-id="${element.maDVHC}" value="${element.maDVHC}">${element.ten}</option>`
+            });
+            document.querySelector("#" + select).innerHTML = row
+        }
+
+    </script>
+}

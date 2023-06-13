@@ -1,0 +1,194 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Danh sách lên đơn</h5>
+                </div>
+                <div id="table-data">
+                    <div class="card-body">
+                        <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-secondary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-success" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-danger" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-warning" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-info" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-light" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-dark" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ stiped-table ] end -->
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Lên lịch hẹn cho khách</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="dateAppointment" class="col-form-label">Ngày hẹn</label>
+                    <input type="text" class="form-control" id="dateAppointment" />
+                </div>
+                <div class="form-group">
+                    <label for="appointmentContent" class="col-form-label">Ghi chú</label>
+                    <textarea placeholder="Nhập nội dung ghi chú"
+                              rows="3" type="text" class="form-control" id="appointmentContent"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="save()" class="btn  btn-primary" title="Lưu lại">
+                    <i class="fa fa-cloud" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn  btn-secondary" data-dismiss="modal" title="Đóng lại">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript">
+
+        let pagenum = 0;
+        let customerId =0;
+        $(document).ready(function () {
+           
+            jQuery('#dateAppointment').datetimepicker({
+                format: 'd/m/Y',
+                defaultDate: new Date(),
+            });
+
+
+
+            load(1, null);
+            pagenum = 1;
+        });
+        // Load data
+        function load(i, keyword) {
+            axios.get('@Url.Action("Table", "Customer")', {
+                params: {
+                    //  pageding: datas
+                    KeyWord: keyword,
+                    PageNum: i,
+                    PageSize: 8,
+                }
+            })
+                .then(function (response) {
+                    $("#table-data").html(response.data);
+                })
+                .catch(function (error) {
+                    $.notify(error, "error");
+                })
+        }
+        //
+        function nextpage(i) {
+            pagenum = i;
+            load(i, $("#searchkeyword").val());
+        }
+        //
+        function search() {
+            load(pagenum, $("#searchkeyword").val());
+        };
+        function checkorder(id){
+            let CustomerStatusId = $("#" + id).val();
+            let CustomerId  = id;
+            axios.get('@Url.Action("ChangStatus", "Customer")', {
+                params: {
+                    customerId: CustomerId,
+                    customerStatusId:CustomerStatusId
+                }
+            })
+                .then(function (response) {
+                    if(response.status==200){
+                        $.notify("Chỉnh sửa thành công!", "success");
+                    }else{
+                        $.notify("Chỉnh sửa không thành công!", "error");
+                    }
+                    load(1, null);
+                })
+                .catch(function (error) {
+                    $.notify(error, "error");
+                })
+        }
+       function appointment(id){
+            customerId = id;
+            $('#exampleModal').modal();
+       }
+        function save() {
+            if (true) {
+                
+                axios
+                    .post('@Url.Action("Add", "AppointmentSchedules")', {
+                        customerId: customerId,
+                        dateAppointments: $("#dateAppointment").val(),
+                        note: $("#appointmentContent").val(),
+                        isActive:true,
+                    })
+                    .then(response => {
+                        if (response.data < 1) {
+                            $.notify("Thêm mới thành công!", "success");
+                        }
+                        load(1, null);
+                        $('#exampleModal').modal('hide');
+                    })
+                    .catch(function (error) {
+                        $.notify(error, "error");
+                    });
+            }
+        }
+       
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

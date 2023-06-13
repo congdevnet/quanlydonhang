@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebQuanLyBanHang", "WebQuanLyBanHang\WebQuanLyBanHang.csproj", "{DAF47306-7543-4C94-BBC5-8FC55AA2A60C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebQuanLyBanHang.Data", "WebQuanLyBanHang.Data\WebQuanLyBanHang.Data.csproj", "{8BCD92F4-415B-4F6A-A08C-4C7D7BBEF1D9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebQuanLyBanHang.Common", "WebQuanLyBanHang.Common\WebQuanLyBanHang.Common.csproj", "{F247CC28-B350-4F4F-ACC0-BCD3BA9E53AD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebQuanLyBanHang.Repository", "WebQuanLyBanHang.Repository\WebQuanLyBanHang.Repository.csproj", "{BD91597A-509E-4F88-B1CF-4B613E9217C5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebQuanLyBanHang.Service", "WebQuanLyBanHang.Service\WebQuanLyBanHang.Service.csproj", "{C6ADBA31-E49B-48AF-91D2-2C750962CF8D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebQuanLyBanHang.Utilities", "WebQuanLyBanHang.Utilities\WebQuanLyBanHang.Utilities.csproj", "{3B95DEBA-2483-4516-BC59-5D2C94C71DBB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DAF47306-7543-4C94-BBC5-8FC55AA2A60C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAF47306-7543-4C94-BBC5-8FC55AA2A60C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAF47306-7543-4C94-BBC5-8FC55AA2A60C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAF47306-7543-4C94-BBC5-8FC55AA2A60C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BCD92F4-415B-4F6A-A08C-4C7D7BBEF1D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BCD92F4-415B-4F6A-A08C-4C7D7BBEF1D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BCD92F4-415B-4F6A-A08C-4C7D7BBEF1D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BCD92F4-415B-4F6A-A08C-4C7D7BBEF1D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F247CC28-B350-4F4F-ACC0-BCD3BA9E53AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F247CC28-B350-4F4F-ACC0-BCD3BA9E53AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F247CC28-B350-4F4F-ACC0-BCD3BA9E53AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F247CC28-B350-4F4F-ACC0-BCD3BA9E53AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD91597A-509E-4F88-B1CF-4B613E9217C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD91597A-509E-4F88-B1CF-4B613E9217C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD91597A-509E-4F88-B1CF-4B613E9217C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD91597A-509E-4F88-B1CF-4B613E9217C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6ADBA31-E49B-48AF-91D2-2C750962CF8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6ADBA31-E49B-48AF-91D2-2C750962CF8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6ADBA31-E49B-48AF-91D2-2C750962CF8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6ADBA31-E49B-48AF-91D2-2C750962CF8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B95DEBA-2483-4516-BC59-5D2C94C71DBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B95DEBA-2483-4516-BC59-5D2C94C71DBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B95DEBA-2483-4516-BC59-5D2C94C71DBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B95DEBA-2483-4516-BC59-5D2C94C71DBB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B67AE28B-1953-49C4-AEE6-8BA68BCB380C}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <h2>Phần điều kiện báo cáo</h2>
+    <br />
+    <form>
+        <div class="form-group">
+            <label for="tenbaocao">Tên báo cáo:</label>
+            <input type="text" class="form-control" id="tenbaocao" placeholder="Nhập tên báo cáo">
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label for="tungay">Từ ngày:</label>
+                <input type="date" class="form-control" id="tungay" placeholder="Password" />
+            </div>
+            <div class="form-group col-md-3">
+                <label for="denngay">Đến ngày:</label>
+                <input type="date" class="form-control" id="denngay">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="trangthaidon">Trạng thái đơn:</label>
+                <select class="form-control" id="trangthaidon">
+                    <option selected>--Chọn trạng thái đơn--</option>
+                    <option value="1">Tiếp nhận</option>
+                    <option value="2">Bom Hàng</option>
+                    <option value="3">Hoàn thành</option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="dinhdanhex">Xuất theo định dạng:</label>
+                <select class="form-control" id="dinhdanhex">
+                    <option selected>--Chọn định dạng--</option>
+                    <option value="1">PDF</option>
+                    <option value="2">Excel</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+        <div style="float:right">
+            <a href="/in-bao-cao" class="btn btn-facebook"><i class="fa fa-print" aria-hidden="true"></i>Print</a>
+            <a href="/xuat-ban-ex" target="_blank" class="btn btn-secondary">
+                <i class="fa fa-table" aria-hidden="true"></i>
+                Excel
+            </a>
+        </div>
+        <br />
+        <div style="clear:both"></div>
+       
+    </form>
+</div>
+
+
+
+
+

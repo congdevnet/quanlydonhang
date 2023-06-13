@@ -1,0 +1,45 @@
+﻿@using WebQuanLyBanHang.Utilities.ViewModel;
+@using WebQuanLyBanHang.Utilities;
+@model ResponseData<CustomerSale>
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered"  width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Số điện thoại</th>
+                    <th>Nhân viên MKT</th>
+                    <th>Nhân viên sale</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody id="checkboxes">
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        @if (item.StatusSale != ConstPrameter.Receive)
+                        {
+                            <td></td>
+                        }
+                        else{
+                            <td><input id="@item.Id" type="checkbox" name="@item.Id" /></td>
+                         }
+
+                        <td>@item.PhoneNumber</td>
+                        <td>@item.NameMKT</td>
+                        <td>@item.NameSale</td>
+                        <td>@item.StatusSale</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div>
+            @await Component.InvokeAsync("Paging", Model)
+        </div>
+    </div>
+</div>

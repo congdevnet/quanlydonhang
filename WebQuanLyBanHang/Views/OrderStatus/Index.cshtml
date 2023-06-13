@@ -1,0 +1,255 @@
+﻿@using WebQuanLyBanHang.Utilities.ViewModel;
+@model IQueryable<OrderStatusVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- [ Main Content ] start -->
+<!-- [ Main Content ] start -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Trạng thái đơn hàng</h1>
+    <p class="mb-4">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" id="searchkeyword">
+            <button onclick="search()" class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </div>
+    </p>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"></h6>
+            <button onclick="openmodal()" style="float:right" type="button" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Thêm mới</button>
+        </div>
+        <div class="card-body">
+            <div id="table-data">
+                <div class="card-body">
+                    <div class="spinner-grow text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-secondary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-success" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-danger" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-warning" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-info" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-light" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-dark" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="hidden" id="idhide" />
+                    <label for="recipient-name" class="col-form-label">Tên trạng thái</label>
+                    <input type="text" class="form-control"  id="namestatus">
+                </div>
+                <div class="form-group">
+                    <label for="message-text" class="col-form-label">Thứ tự</label>
+                    <input type="number" min="1" class="form-control" id="oderstatus">
+                </div>
+                <div class="form-group">
+                    <label for="message-text" class="col-form-label">Màu</label>
+                    <input type="color" class="form-control" id="colorstatus">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="save()" class="btn  btn-primary" title="Lưu lại">
+                    <i class="fa fa-cloud" aria-hidden="true"></i>
+                    </button>
+                <button type="button" class="btn  btn-secondary" data-dismiss="modal" title="Đóng lại">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        let pagenum = 0;
+
+        $(document).ready(function () {
+            load(1, null);
+            pagenum = 1;
+            Reset();
+        });
+        function openmodal() {
+            $('#exampleModal').modal();
+            Reset();
+        }
+
+        // Load data
+        function load(i, keyword) {
+            axios.get('@Url.Action("Table", "OrderStatus")', {
+                params: {
+                    //  pageding: datas
+                    KeyWord: keyword,
+                    PageNum: i,
+                    PageSize: 8,
+                }
+            })
+                .then(function (response) {
+                    $("#table-data").html(response.data);
+                })
+                .catch(function (error) {
+                    $.notify(error, "error");
+                })
+        };
+       
+        //
+        let ckdata;
+        function checkdata(){
+            axios.get('@Url.Action("CheckData", "OrderStatus")', {
+                params: {
+                    keyword: $("#namestatus").val()
+                }
+            })
+                .then(function (response) {
+                   if(response.data == true){
+                        ckdata = false;
+                        CreateValidate('#namestatus', 'Tên đã bị trùng!')
+                   }else{
+                        ckdata = true;
+                        ClearError('#namestatus');
+                   }
+                   
+                })
+                .catch(function (error) {
+                    $.notify(error, "error");
+                    
+                })
+        }
+        //
+        function nextpage(i) {
+            pagenum = i;
+            load(i, $("#searchkeyword").val());
+        }
+        //
+        function search() {
+            load(pagenum, $("#searchkeyword").val());
+        }
+        //
+        /// Hàm resert các đầu nhập vào //
+        function Reset() {
+            $("#namestatus").val(null);
+            $("#oderstatus").val(null);
+            $("#colorstatus").val(null);
+            $("#idhide").val(0);
+            //Xóa lỗi
+            ClearError('#namestatus');
+            
+        }
+        //
+        function validatefrom() {
+            FormModalIsValid = true;
+            ValidateRequireControl('#namestatus', 'Bạn phải nhập tên trạng thái!');
+            ValidateRequireControlMaxLength('#namestatus', 'Đã vượt qua 256 ký tự', 256);
+        }
+        //
+        function edit(id) {
+            axios.get('@Url.Action("GetModel", "OrderStatus")', {
+                params: {
+                    id: id
+                }
+            })
+                .then(function (response) {
+                    $('#exampleModal').modal('show');
+                    $("#namestatus").val(response.data.name);
+                    $("#oderstatus").val(response.data.orders);
+                    $("#colorstatus").val(response.data.color);
+                    $("#idhide").val(response.data.id);
+                })
+                .catch(function (error) {
+                    $.notify(error, "error");
+                });
+        };
+        function del(id) {
+            Swal.fire({
+                title: 'Bạn chắc chắn muốn xóa?',
+                // text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Đồng ý',
+                cancelButtonText: "Quay lại",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete('@Url.Action("Delete", "OrderStatus")', {
+                        params: {
+                            id: id
+                        }
+                    }).then(
+
+                        Swal.fire(
+                            'Xóa!',
+                            'Bạn đã xóa bỏ 1 bản ghi',
+                            'success'
+                        )
+
+                    );
+                    load();
+                }
+            });
+        };
+        //save
+        function save() {
+            validatefrom();
+            checkdata();
+            if (FormModalIsValid && ckdata) {
+                axios
+                    .post('@Url.Action("Add", "OrderStatus")', {
+                        // Data to be sent to the server
+                        id: $("#idhide").val(),
+                        name: $("#namestatus").val(),
+                        orders: $("#oderstatus").val(),
+                        color: $("#colorstatus").val(),
+                    })
+                    .then(response => {
+                        if (response.data < 1) {
+                            $.notify("Thêm mới thành công!", "success");
+                        }
+                        else {
+                            $.notify("Chỉnh sửa thành công!", "success");
+                        }
+                        load();
+                        $('#exampleModal').modal('hide');
+                    })
+                    .catch(function (error) {
+                        $.notify(error, "error");
+                    });
+            }
+        }
+    </script>
+}

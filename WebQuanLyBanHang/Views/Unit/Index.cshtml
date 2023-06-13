@@ -1,0 +1,244 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- [ Main Content ] start -->
+<!-- [ Main Content ] start -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Đơn vị</h1>
+    <p class="mb-4">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" id="searchkeyword">
+            <button onclick="search()" class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </div>
+    </p>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"></h6>
+            <button onclick="openmodal()" style="float:right" type="button" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Thêm mới</button>
+        </div>
+        <div class="card-body">
+            <div id="table-data">
+                <div class="card-body">
+                    <div class="spinner-grow text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-secondary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-success" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-danger" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-warning" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-info" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-light" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-dark" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="hidden" id="idhide" />
+                    <label for="recipient-name" class="col-form-label">Đơn vị</label>
+                    <input type="text" class="form-control" id="namedonvi">
+                </div>
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="save()" class="btn  btn-primary" title="Lưu lại">
+                    <i class="fa fa-cloud" aria-hidden="true"></i>
+                    </button>
+                <button type="button" class="btn  btn-secondary" data-dismiss="modal" title="Đóng lại">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                    </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        let pagenum = 0;
+
+        $(document).ready(function () {
+            load(1, null);
+            pagenum = 1;
+            Reset();
+        });
+        function openmodal() {
+            $('#exampleModal').modal();
+            Reset();
+        }
+
+        // Load data
+        function load(i, keyword) {
+            axios.get('@Url.Action("Table", "Unit")', {
+                params: {
+                    //  pageding: datas
+                    KeyWord: keyword,
+                    PageNum: i,
+                    PageSize: 8,
+                }
+            })
+                .then(function (response) {
+                    $("#table-data").html(response.data);
+                })
+                .catch(function (error) {
+                    $.notify(error, "error");
+                })
+        }
+        //
+        let ckdata;
+        function checkdata() {
+            axios.get('@Url.Action("CheckData", "Unit")', {
+                params: {
+                    keyword: $("#namedonvi").val()
+                }
+            })
+                .then(function (response) {
+                    if (response.data == true) {
+                        ckdata = false;
+                        CreateValidate('#namedonvi', 'Tên đã bị trùng!')
+                    } else {
+                        ckdata = true;
+                        ClearError('#namedonvi');
+                    }
+
+                })
+                .catch(function (error) {
+                    $.notify(error, "error");
+
+                })
+        }
+        //
+        function nextpage(i) {
+            pagenum = i;
+            load(i, $("#searchkeyword").val());
+        }
+        //
+        function search() {
+            load(pagenum, $("#searchkeyword").val());
+        }
+        //
+        /// Hàm resert các đầu nhập vào //
+        function Reset() {
+            $("#namedonvi").val(null);
+            $("#idhide").val(0);
+            //Xóa lỗi
+            ClearError('#namedonvi');
+
+        }
+        //
+        function validatefrom() {
+            FormModalIsValid = true;
+            ValidateRequireControl('#namedonvi', 'Bạn phải nhập tên trạng thái!');
+            ValidateRequireControlMaxLength('#namedonvi', 'Đã vượt qua 256 ký tự', 256);
+        }
+        //
+        function edit(id) {
+            axios.get('@Url.Action("GetModel", "Unit")', {
+                params: {
+                    id: id
+                }
+            })
+                .then(function (response) {
+                    $('#exampleModal').modal('show');
+                    $("#namedonvi").val(response.data.name);
+                    $("#idhide").val(response.data.id);
+                })
+                .catch(function (error) {
+                    $.notify(error, "error");
+                });
+        };
+        function del(id) {
+            Swal.fire({
+                title: 'Bạn chắc chắn muốn xóa?',
+                // text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Đồng ý',
+                cancelButtonText: "Quay lại",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete('@Url.Action("Delete", "Unit")', {
+                        params: {
+                            id: id
+                        }
+                    }).then(response => {
+                        if (response.status == 200) {
+                            Swal.fire(
+                                'Xóa!',
+                                'Bạn đã xóa bỏ 1 bản ghi',
+                                'success',
+                            )
+
+                        } else {
+                            $.notify(error, "Loại này đang sử dụng!");
+                        }
+                        load(1, null);
+                    });
+
+                }
+
+            });
+        };
+        //save
+        function save() {
+            validatefrom();
+            checkdata();
+            if (FormModalIsValid && ckdata) {
+                axios
+                    .post('@Url.Action("Add", "Unit")', {
+                        // Data to be sent to the server
+                        id: $("#idhide").val(),
+                        name: $("#namedonvi").val(),
+                    })
+                    .then(response => {
+                        if (response.data < 1) {
+                            $.notify("Thêm mới thành công!", "success");
+                        }
+                        else {
+                            $.notify("Chỉnh sửa thành công!", "success");
+                        }
+                        load(1,null);
+                        $('#exampleModal').modal('hide');
+                    })
+                    .catch(function (error) {
+                        $.notify(error, "error");
+                    });
+            }
+        }
+    </script>
+}

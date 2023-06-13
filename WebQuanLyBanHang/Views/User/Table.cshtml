@@ -1,0 +1,48 @@
+﻿@using WebQuanLyBanHang.Utilities.ViewModel;
+@using WebQuanLyBanHang.Utilities;
+@model ResponseData<UserVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+<div class="card-body table-border-style">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Tên nhân viên</th>
+                    <th>Tài khoản</th>
+                    <th>Ngày sinh</th>
+                    <th>Email</th>
+                    <th>Số điện thoại</th>
+                    <th class="text-center">Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.FullName</td>
+                        <td>@item.UserName</td>
+                        <td>@item.DateOfBirth.Value.ToString("dd/MM/yyyy")</td>
+                        <td>@item.Email</td>
+                        <td>@item.PhoneNumber</td>
+                        <td class="text-center">
+                            <a asp-action="GetResult" asp-controller="User" asp-route-Id="@item.Id" title="Sửa">
+                                <i class="fa fa-wrench" aria-hidden="true"></i>
+                                </a>&nbsp;|
+                            <a asp-action="ChangePassword" asp-controller="User" asp-route-Id ="@item.Id" title="Đổi mật khẩu">
+                                <i class="fa fa-key" aria-hidden="true"></i>
+                                </a>&nbsp;|
+                            
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div>
+            @await Component.InvokeAsync("Paging", Model)
+        </div>
+    </div>
+</div>

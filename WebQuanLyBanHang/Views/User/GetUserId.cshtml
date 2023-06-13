@@ -1,0 +1,72 @@
+﻿@using WebQuanLyBanHang.Data.Entity;
+@model User
+@{
+    ViewData["Title"] = "GetUserId";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <h1 class="row mb-4">Thông tin tài khoản: @Model.UserName</h1>
+    <form>
+        <!-- 2 column grid layout with text inputs for the first and last names -->
+        <div class="row mb-4">
+            <div class="col-md-3 mb-4">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Tài khoản</span>
+                    </div>
+                    <input type="text" class="form-control" asp-for="UserName">
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Họ và tên:</span>
+                    </div>
+                    <input type="text" class="form-control" asp-for="FullName">
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                 <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Email:</span>
+                    </div>
+                    <input type="text" class="form-control" asp-for="Email">
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Địa chỉ:</span>
+                    </div>
+                    <input type="text" class="form-control" asp-for="Address">
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                 <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Ngày sinh</span>
+                    </div>
+                    <input type="date" class="form-control" asp-for="DateOfBirth">
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Số điện thoại</span>
+                    </div>
+                    <input type="text" class="form-control" asp-for="PhoneNumber">
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                 <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Giới tính</span>
+                    </div> 
+                    <input type="checkbox" class="form-control" asp-for="Sex" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

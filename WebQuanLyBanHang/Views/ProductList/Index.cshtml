@@ -1,0 +1,87 @@
+﻿@using WebQuanLyBanHang.Utilities.ViewModel;
+@using WebQuanLyBanHang.Utilities;
+@model ResponseData<ProductVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- [ Main Content ] start -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Danh sách sản phẩm</h1>
+    <p class="mb-4">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" id="searchkeyword">
+            <button onclick="search()" class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </div>
+    </p>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"></h6>
+            <a asp-controller="ProductList" asp-action="Add" style="float:right" class="btn btn-primary">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                </i>Thêm mới
+            </a>
+        </div>
+        <div class="card-body">
+            <div id="table-data">
+                <div class="card-body table-border-style">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    @*<th>Mã sản phẩm</th>*@
+                                    <th>Ảnh sản phẩm</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th>Số tồn</th>
+                                    <th>Giá ban đầu</th>
+                                    <th>Giá bán ra</th>
+                                    <th class="text-center">Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Items)
+                                {
+                                    <tr>
+                                        @*<td>@item.ProductCode</td>*@
+                                        <td>
+                                            <img style="width:40px; height:40px"
+                                                 src="~/uploads/@item.Picture" />
+                                        </td>
+                                        <td>@item.ProductName</td>
+                                        <td>@item.Quanlity</td>
+                                        <td>@item.InventoryNumber</td>
+                                        <td>@item.Price</td>
+                                        <td>@item.InitialPrice</td>
+                                        <td class="text-center">
+                                            <a class="btn btn-success" asp-action="Edit" asp-controller="ProductList" asp-route-id="@item.Id" title="Sửa">
+                                                <i class="fa fa-wrench" aria-hidden="true"></i>
+                                                Sửa</a>&nbsp;
+                                            <a class="btn btn-danger" onclick="del('@item.Id')" title="Xóa">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                Xóa</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div>
+                            @await Component.InvokeAsync("Paging", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    <script type="text/javascript">
+
+    </script>
+     }
+
+

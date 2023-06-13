@@ -1,0 +1,55 @@
+﻿@using WebQuanLyBanHang.Utilities.ViewModel;
+@using WebQuanLyBanHang.Utilities;
+@model ResponseData<CustomerSale>
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+
+}
+
+<div class="card-body table-border-style">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+
+                    <th class="text-center">Số điện thoại khách</th>
+                    <th class="text-center">Trạng thái</th>
+                    <th class="text-center">Chức năng</th>
+                </tr>
+            </thead>
+            <tbody id="checkboxes">
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td class="text-center">@item.PhoneNumber</td>
+                        <td class="text-center">
+                            <select asp-for="@item.Status" id="@item.Id" onchange="checkorder('@item.Id')" asp-items="@ViewBag.CustomerStatus"
+                            class="form-control">
+                            </select>
+                        </td>
+                        <td class="text-center">
+                            @if (item.Status == ConstPrameter.Order && !item.IsOrderActive)
+                            {
+                                <a asp-controller="OrderMag" asp-action="Add" asp-route-id="@item.Id" class="btn  btn-primary" onclick="edit('@item.Id')" title="Lên đơn">
+                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                </a>
+                            }
+                           
+                            @if (item.Status == ConstPrameter.Appointment && !item.IsActive)
+                            {
+                                <a class="btn btn-info" onclick="appointment('@item.Id')" title="Khách hẹn">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </a>
+
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div>
+            @await Component.InvokeAsync("Paging", Model)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+E:\quanlydonhangvs1\WebQuanLyBanHang.Common\bin\Release\net6.0\WebQuanLyBanHang.Common.deps.json
+E:\quanlydonhangvs1\WebQuanLyBanHang.Common\bin\Release\net6.0\WebQuanLyBanHang.Common.dll
+E:\quanlydonhangvs1\WebQuanLyBanHang.Common\bin\Release\net6.0\WebQuanLyBanHang.Common.pdb
+E:\quanlydonhangvs1\WebQuanLyBanHang.Common\obj\Release\net6.0\WebQuanLyBanHang.Common.csproj.AssemblyReference.cache
+E:\quanlydonhangvs1\WebQuanLyBanHang.Common\obj\Release\net6.0\WebQuanLyBanHang.Common.GeneratedMSBuildEditorConfig.editorconfig
+E:\quanlydonhangvs1\WebQuanLyBanHang.Common\obj\Release\net6.0\WebQuanLyBanHang.Common.AssemblyInfoInputs.cache
+E:\quanlydonhangvs1\WebQuanLyBanHang.Common\obj\Release\net6.0\WebQuanLyBanHang.Common.AssemblyInfo.cs
+E:\quanlydonhangvs1\WebQuanLyBanHang.Common\obj\Release\net6.0\WebQuanLyBanHang.Common.csproj.CoreCompileInputs.cache
+E:\quanlydonhangvs1\WebQuanLyBanHang.Common\obj\Release\net6.0\WebQuanLyBanHang.Common.dll
+E:\quanlydonhangvs1\WebQuanLyBanHang.Common\obj\Release\net6.0\refint\WebQuanLyBanHang.Common.dll
+E:\quanlydonhangvs1\WebQuanLyBanHang.Common\obj\Release\net6.0\WebQuanLyBanHang.Common.pdb
+E:\quanlydonhangvs1\WebQuanLyBanHang.Common\obj\Release\net6.0\ref\WebQuanLyBanHang.Common.dll

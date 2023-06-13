@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- [ Main Content ] start -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Danh sách tài khoản</h1>
+    <p class="mb-4">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" id="searchkeyword">
+            <button onclick="search()" class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </div>
+    </p>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"></h6>
+            <a asp-controller="User" asp-action="Add" style="float:right" class="btn btn-primary">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                </i>Thêm mới
+            </a>
+        </div>
+        <div class="card-body">
+            <div id="table-data">
+                <div class="card-body">
+                    <div class="spinner-grow text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-secondary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-success" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-danger" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-warning" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-info" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-light" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-dark" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    <script type="text/javascript">
+
+        let pagenum = 0;
+
+        $(document).ready(function () {
+            load(1, null);
+            pagenum = 1;
+            
+        });
+        // Load data
+        function load(i, keyword) {
+            axios.get('@Url.Action("Table", "User")', {
+                params: {
+                    //  pageding: datas
+                    KeyWord: keyword,
+                    PageNum: i,
+                    PageSize: 8,
+                }
+            })
+                .then(function (response) {
+                    $("#table-data").html(response.data);
+                })
+                .catch(function (error) {
+                    $.notify(error, "error");
+                })
+        }
+        function nextpage(i) {
+            pagenum = i;
+            load(i, $("#searchkeyword").val());
+        }
+        //
+        function search() {
+            load(pagenum, $("#searchkeyword").val());
+        }
+        
+    </script>
+}

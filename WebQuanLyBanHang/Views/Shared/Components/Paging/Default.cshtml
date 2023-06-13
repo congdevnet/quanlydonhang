@@ -1,0 +1,34 @@
+﻿@model dynamic
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        @if (Model.PageIndex > 1)
+           { <li class="page-item">
+                <a class="page-link" onclick="nextpage(@Model.PageIndex-1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Trước</span>
+                </a>
+            </li>
+           }
+        @for (int i = 1; i <= Model.TotalPage; i++)
+        {
+            @if (Model.PageIndex == i)
+            {
+                <li class="page-item active"><a class="page-link" onclick="nextpage(@i)">@i</a></li>
+            }
+            else
+            {
+                <li class="page-item"><a class="page-link" onclick="nextpage(@i)">@i</a></li>
+            }
+        }
+        @if (Model.PageIndex < Model.TotalPage)
+        {
+            <li class="page-item">
+                <a class="page-link" onclick="nextpage(@Model.PageIndex+1)" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Sau</span>
+            </a>
+        </li>
+        }
+    </ul>
+</nav>

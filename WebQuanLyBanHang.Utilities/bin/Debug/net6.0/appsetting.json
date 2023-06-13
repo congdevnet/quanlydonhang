@@ -1,0 +1,6 @@
+{
+  "ConnectionStrings": {
+    "QLBHDatabase": 
+    "Server=.;Database=ManagerShop;Trusted_Connection=SSPI;Encrypt=false;TrustServerCertificate=true"
+  }
+}

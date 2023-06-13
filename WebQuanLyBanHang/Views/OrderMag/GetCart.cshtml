@@ -1,0 +1,41 @@
+﻿@using WebQuanLyBanHang.Utilities.ViewModel;
+@model List<CartItem>
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+    double sumCart = Model.Sum(x => x.UnitPrice);
+    int count = Model.Sum(x => x.Quantity);
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Sản phẩm</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Đơn giá</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@item.UnitPrice</td>
+                <td>
+                    <a style="cursor:pointer" onclick="delCart('@item.CartId')" title="Xóa sp">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="1">Tổng: </td>
+            <td colspan="1">@count</td>
+            <td colspan="1" id="sumCart">@sumCart</td>
+            <td colspan="1"></td>
+        </tr>
+    </tfoot>
+</table>

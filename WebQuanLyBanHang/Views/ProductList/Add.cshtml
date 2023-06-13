@@ -1,0 +1,118 @@
+﻿@using WebQuanLyBanHang.Utilities.ViewModel;
+@model ProductVM
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <div class="page-header-title">
+                        <h5 class="m-b-10">Thêm mới sản phẩm</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form asp-action="Add" asp-controller="ProductList" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="ProductCode">Mã code</label>
+                    <input type="text" class="form-control" asp-for="ProductCode" placeholder="Mã code">
+                    <span asp-validation-for="ProductCode" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Barcode">Mã vạch</label>
+                    <input type="text" class="form-control" asp-for="Barcode"/>
+                    <span asp-validation-for="Barcode" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="ProductName">Tên sản phẩm</label>
+                    <input type="text" class="form-control" asp-for="ProductName" >
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Price">Giá bán</label>
+                    <input type="number" step=".01" class="form-control" asp-for="Price" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="InitialPrice">Gía gốc</label>
+                    <input type="number" step=".01" class="form-control" asp-for="InitialPrice">
+                    <span asp-validation-for="InitialPrice" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label asp-for="Quanlity">Số lượng</label>
+                    <input type="number" class="form-control" min="0" asp-for="Quanlity" />
+                    <span asp-validation-for="Quanlity" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Mass">Khối</label>
+                    <input type="number" step=".01" class="form-control" asp-for="Mass" />
+                    <span asp-validation-for="Mass" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="UnitId">Đơn vị</label>
+                    <select asp-for="UnitId" asp-items="@ViewBag.Unit" class="form-control">
+                        <option>Chọn đơn vị</option>
+                    </select>
+                    <span asp-validation-for="UnitId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="ClassifyProductId">Loại sản phẩm</label>
+                    <select asp-for="ClassifyProductId" asp-items="@ViewBag.ClassifyProduct" class="form-control">
+                        <option>Chọn loại sản phẩm</option>
+                    </select>
+                    <span asp-validation-for="ClassifyProductId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="StatusProductId">Trạng thái sản phẩm</label>
+                    <select asp-for="StatusProductId" asp-items="@ViewBag.StatusProduct" class="form-control">
+                    </select>
+                    <span asp-validation-for="StatusProductId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="ProductImage">Ảnh sản phẩm</label>
+                    <input type="file" asp-for="ProductImage" class="form-control" />
+                    <span asp-validation-for="ProductImage" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Picture">Tên ảnh</label>
+                    <input type="text" asp-for="Picture" class="form-control" readonly />
+                    <span asp-validation-for="Picture" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <img style="width: 100px; height:100px" id="img-preview" src="~/assets/images/logo.png" />
+                </div>
+            </div>
+            <button type="submit" class="btn  btn-primary">Cập nhật</button>
+            <a href="/danh-sach-san-pham" class="btn btn-light">Hủy</a>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript">
+        
+        const input = document.getElementById('ProductImage');
+        const image = document.getElementById('img-preview');
+        const filename = document.getElementById('Picture');
+
+        input.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                const src = URL.createObjectURL(e.target.files[0]);
+                image.src = src;
+                filename.value=e.target.files[0].name;
+            }
+        });
+    </script>
+}

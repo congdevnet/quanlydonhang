@@ -1,0 +1,189 @@
+{
+  "Files": [
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\WebQuanLyBanHang.bundle.scp.css",
+      "PackagePath": "staticwebassets\\WebQuanLyBanHang.bundle.scp.css"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\Uploads\\quanbo.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\quanbo.jpg"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\Uploads\\vay12.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\vay12.jpg"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\css\\all.min.css",
+      "PackagePath": "staticwebassets\\css\\all.min.css"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\css\\dataTables.bootstrap4.min.css",
+      "PackagePath": "staticwebassets\\css\\dataTables.bootstrap4.min.css"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\css\\sb-admin-2.min.css",
+      "PackagePath": "staticwebassets\\css\\sb-admin-2.min.css"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\dvhc_data.xml",
+      "PackagePath": "staticwebassets\\dvhc_data.xml"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\img\\favico.jpg",
+      "PackagePath": "staticwebassets\\img\\favico.jpg"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\img\\in-bao-cao.pdf",
+      "PackagePath": "staticwebassets\\img\\in-bao-cao.pdf"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\img\\logo.png",
+      "PackagePath": "staticwebassets\\img\\logo.png"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\img\\undraw_posting_photo.svg",
+      "PackagePath": "staticwebassets\\img\\undraw_posting_photo.svg"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\img\\undraw_profile.svg",
+      "PackagePath": "staticwebassets\\img\\undraw_profile.svg"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\img\\undraw_profile_1.svg",
+      "PackagePath": "staticwebassets\\img\\undraw_profile_1.svg"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\img\\undraw_profile_2.svg",
+      "PackagePath": "staticwebassets\\img\\undraw_profile_2.svg"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\img\\undraw_profile_3.svg",
+      "PackagePath": "staticwebassets\\img\\undraw_profile_3.svg"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\img\\undraw_rocket.svg",
+      "PackagePath": "staticwebassets\\img\\undraw_rocket.svg"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\js\\chart-area-demo.js",
+      "PackagePath": "staticwebassets\\js\\chart-area-demo.js"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\js\\chart-bar-demo.js",
+      "PackagePath": "staticwebassets\\js\\chart-bar-demo.js"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\js\\chart-pie-demo.js",
+      "PackagePath": "staticwebassets\\js\\chart-pie-demo.js"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\js\\dataTables.bootstrap4.min.js",
+      "PackagePath": "staticwebassets\\js\\dataTables.bootstrap4.min.js"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\js\\datatables-demo.js",
+      "PackagePath": "staticwebassets\\js\\datatables-demo.js"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\js\\jquery.dataTables.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.dataTables.min.js"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\js\\jquery.easing.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.easing.min.js"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\js\\jquery.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.min.js"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\js\\sb-admin-2.min.js",
+      "PackagePath": "staticwebassets\\js\\sb-admin-2.min.js"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\js\\validation.js",
+      "PackagePath": "staticwebassets\\js\\validation.js"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\webfonts\\fa-brands-400.eot",
+      "PackagePath": "staticwebassets\\webfonts\\fa-brands-400.eot"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\webfonts\\fa-brands-400.svg",
+      "PackagePath": "staticwebassets\\webfonts\\fa-brands-400.svg"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\webfonts\\fa-brands-400.ttf",
+      "PackagePath": "staticwebassets\\webfonts\\fa-brands-400.ttf"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\webfonts\\fa-brands-400.woff",
+      "PackagePath": "staticwebassets\\webfonts\\fa-brands-400.woff"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\webfonts\\fa-brands-400.woff2",
+      "PackagePath": "staticwebassets\\webfonts\\fa-brands-400.woff2"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\webfonts\\fa-regular-400.eot",
+      "PackagePath": "staticwebassets\\webfonts\\fa-regular-400.eot"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\webfonts\\fa-regular-400.svg",
+      "PackagePath": "staticwebassets\\webfonts\\fa-regular-400.svg"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\webfonts\\fa-regular-400.ttf",
+      "PackagePath": "staticwebassets\\webfonts\\fa-regular-400.ttf"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\webfonts\\fa-regular-400.woff",
+      "PackagePath": "staticwebassets\\webfonts\\fa-regular-400.woff"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\webfonts\\fa-regular-400.woff2",
+      "PackagePath": "staticwebassets\\webfonts\\fa-regular-400.woff2"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\webfonts\\fa-solid-900.eot",
+      "PackagePath": "staticwebassets\\webfonts\\fa-solid-900.eot"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\webfonts\\fa-solid-900.svg",
+      "PackagePath": "staticwebassets\\webfonts\\fa-solid-900.svg"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\webfonts\\fa-solid-900.ttf",
+      "PackagePath": "staticwebassets\\webfonts\\fa-solid-900.ttf"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\webfonts\\fa-solid-900.woff",
+      "PackagePath": "staticwebassets\\webfonts\\fa-solid-900.woff"
+    },
+    {
+      "Id": "E:\\quanlydonhang\\WebQuanLyBanHang\\wwwroot\\webfonts\\fa-solid-900.woff2",
+      "PackagePath": "staticwebassets\\webfonts\\fa-solid-900.woff2"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.WebQuanLyBanHang.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.WebQuanLyBanHang.props",
+      "PackagePath": "build\\WebQuanLyBanHang.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.WebQuanLyBanHang.props",
+      "PackagePath": "buildMultiTargeting\\WebQuanLyBanHang.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.WebQuanLyBanHang.props",
+      "PackagePath": "buildTransitive\\WebQuanLyBanHang.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

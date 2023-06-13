@@ -1,0 +1,10 @@
+E:\quanlydonhangvs1\Rdlc\bin\Debug\Rdlc.exe.config
+E:\quanlydonhangvs1\Rdlc\bin\Debug\Rdlc.exe
+E:\quanlydonhangvs1\Rdlc\bin\Debug\Rdlc.pdb
+E:\quanlydonhangvs1\Rdlc\obj\Debug\Rdlc.csproj.AssemblyReference.cache
+E:\quanlydonhangvs1\Rdlc\obj\Debug\Rdlc.csproj.SuggestedBindingRedirects.cache
+E:\quanlydonhangvs1\Rdlc\obj\Debug\Rdlc.Properties.Resources.resources
+E:\quanlydonhangvs1\Rdlc\obj\Debug\Rdlc.csproj.GenerateResource.cache
+E:\quanlydonhangvs1\Rdlc\obj\Debug\Rdlc.csproj.CoreCompileInputs.cache
+E:\quanlydonhangvs1\Rdlc\obj\Debug\Rdlc.exe
+E:\quanlydonhangvs1\Rdlc\obj\Debug\Rdlc.pdb
